@@ -1,0 +1,1118 @@
+{
+ "Parameters": {
+  "SbxAccountId": {
+   "Type": "String",
+   "Description": "SbxAccountId"
+  },
+  "UUID": {
+   "Type": "String",
+   "Description": "UUID"
+  }
+ },
+ "Resources": {
+  "ISAppStreamMgmtVPC7423BC26": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/Resource"
+   }
+  },
+  "ISAppStreamMgmtVPCpublicinnovationmgmtSubnet1Subnet96C4417D": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "ISAppStreamMgmtVPC7423BC26"
+    },
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.0.0/24",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "public_innovation_mgmt"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/public_innovation_mgmtSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/public_innovation_mgmtSubnet1/Subnet"
+   }
+  },
+  "ISAppStreamMgmtVPCpublicinnovationmgmtSubnet1RouteTable3532B91B": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "ISAppStreamMgmtVPC7423BC26"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/public_innovation_mgmtSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/public_innovation_mgmtSubnet1/RouteTable"
+   }
+  },
+  "ISAppStreamMgmtVPCpublicinnovationmgmtSubnet1RouteTableAssociation6F9C2C4C": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "ISAppStreamMgmtVPCpublicinnovationmgmtSubnet1RouteTable3532B91B"
+    },
+    "SubnetId": {
+     "Ref": "ISAppStreamMgmtVPCpublicinnovationmgmtSubnet1Subnet96C4417D"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/public_innovation_mgmtSubnet1/RouteTableAssociation"
+   }
+  },
+  "ISAppStreamMgmtVPCpublicinnovationmgmtSubnet1DefaultRoute4ECEBDDE": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "ISAppStreamMgmtVPCpublicinnovationmgmtSubnet1RouteTable3532B91B"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "ISAppStreamMgmtVPCIGWD8F23F1A"
+    }
+   },
+   "DependsOn": [
+    "ISAppStreamMgmtVPCVPCGWDC210076"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/public_innovation_mgmtSubnet1/DefaultRoute"
+   }
+  },
+  "ISAppStreamMgmtVPCpublicinnovationmgmtSubnet1EIP4D40A779": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/public_innovation_mgmtSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/public_innovation_mgmtSubnet1/EIP"
+   }
+  },
+  "ISAppStreamMgmtVPCpublicinnovationmgmtSubnet1NATGateway070AEBC5": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "SubnetId": {
+     "Ref": "ISAppStreamMgmtVPCpublicinnovationmgmtSubnet1Subnet96C4417D"
+    },
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "ISAppStreamMgmtVPCpublicinnovationmgmtSubnet1EIP4D40A779",
+      "AllocationId"
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/public_innovation_mgmtSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/public_innovation_mgmtSubnet1/NATGateway"
+   }
+  },
+  "ISAppStreamMgmtVPCpublicinnovationmgmtSubnet2Subnet6F2580C7": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "ISAppStreamMgmtVPC7423BC26"
+    },
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.1.0/24",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "public_innovation_mgmt"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/public_innovation_mgmtSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/public_innovation_mgmtSubnet2/Subnet"
+   }
+  },
+  "ISAppStreamMgmtVPCpublicinnovationmgmtSubnet2RouteTable76B2FB56": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "ISAppStreamMgmtVPC7423BC26"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/public_innovation_mgmtSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/public_innovation_mgmtSubnet2/RouteTable"
+   }
+  },
+  "ISAppStreamMgmtVPCpublicinnovationmgmtSubnet2RouteTableAssociation40C14A3E": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "ISAppStreamMgmtVPCpublicinnovationmgmtSubnet2RouteTable76B2FB56"
+    },
+    "SubnetId": {
+     "Ref": "ISAppStreamMgmtVPCpublicinnovationmgmtSubnet2Subnet6F2580C7"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/public_innovation_mgmtSubnet2/RouteTableAssociation"
+   }
+  },
+  "ISAppStreamMgmtVPCpublicinnovationmgmtSubnet2DefaultRoute60FAA522": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "ISAppStreamMgmtVPCpublicinnovationmgmtSubnet2RouteTable76B2FB56"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "ISAppStreamMgmtVPCIGWD8F23F1A"
+    }
+   },
+   "DependsOn": [
+    "ISAppStreamMgmtVPCVPCGWDC210076"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/public_innovation_mgmtSubnet2/DefaultRoute"
+   }
+  },
+  "ISAppStreamMgmtVPCpublicinnovationmgmtSubnet2EIP995FD5A6": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/public_innovation_mgmtSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/public_innovation_mgmtSubnet2/EIP"
+   }
+  },
+  "ISAppStreamMgmtVPCpublicinnovationmgmtSubnet2NATGatewayA73C22D8": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "SubnetId": {
+     "Ref": "ISAppStreamMgmtVPCpublicinnovationmgmtSubnet2Subnet6F2580C7"
+    },
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "ISAppStreamMgmtVPCpublicinnovationmgmtSubnet2EIP995FD5A6",
+      "AllocationId"
+     ]
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/public_innovation_mgmtSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/public_innovation_mgmtSubnet2/NATGateway"
+   }
+  },
+  "ISAppStreamMgmtVPCprivateinnovationmgmtSubnet1Subnet70686A5C": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "ISAppStreamMgmtVPC7423BC26"
+    },
+    "AvailabilityZone": {
+     "Fn::Select": [
+      0,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.2.0/24",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "private_innovation_mgmt"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/private_innovation_mgmtSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/private_innovation_mgmtSubnet1/Subnet"
+   }
+  },
+  "ISAppStreamMgmtVPCprivateinnovationmgmtSubnet1RouteTable8C69A9E4": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "ISAppStreamMgmtVPC7423BC26"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/private_innovation_mgmtSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/private_innovation_mgmtSubnet1/RouteTable"
+   }
+  },
+  "ISAppStreamMgmtVPCprivateinnovationmgmtSubnet1RouteTableAssociationC02DCECE": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "ISAppStreamMgmtVPCprivateinnovationmgmtSubnet1RouteTable8C69A9E4"
+    },
+    "SubnetId": {
+     "Ref": "ISAppStreamMgmtVPCprivateinnovationmgmtSubnet1Subnet70686A5C"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/private_innovation_mgmtSubnet1/RouteTableAssociation"
+   }
+  },
+  "ISAppStreamMgmtVPCprivateinnovationmgmtSubnet1DefaultRoute6A3C9021": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "ISAppStreamMgmtVPCprivateinnovationmgmtSubnet1RouteTable8C69A9E4"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "ISAppStreamMgmtVPCpublicinnovationmgmtSubnet1NATGateway070AEBC5"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/private_innovation_mgmtSubnet1/DefaultRoute"
+   }
+  },
+  "ISAppStreamMgmtVPCprivateinnovationmgmtSubnet2Subnet58B91D59": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "ISAppStreamMgmtVPC7423BC26"
+    },
+    "AvailabilityZone": {
+     "Fn::Select": [
+      1,
+      {
+       "Fn::GetAZs": ""
+      }
+     ]
+    },
+    "CidrBlock": "10.0.3.0/24",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "private_innovation_mgmt"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/private_innovation_mgmtSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/private_innovation_mgmtSubnet2/Subnet"
+   }
+  },
+  "ISAppStreamMgmtVPCprivateinnovationmgmtSubnet2RouteTable925CE157": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "ISAppStreamMgmtVPC7423BC26"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/private_innovation_mgmtSubnet2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/private_innovation_mgmtSubnet2/RouteTable"
+   }
+  },
+  "ISAppStreamMgmtVPCprivateinnovationmgmtSubnet2RouteTableAssociation6BB3EE33": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "ISAppStreamMgmtVPCprivateinnovationmgmtSubnet2RouteTable925CE157"
+    },
+    "SubnetId": {
+     "Ref": "ISAppStreamMgmtVPCprivateinnovationmgmtSubnet2Subnet58B91D59"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/private_innovation_mgmtSubnet2/RouteTableAssociation"
+   }
+  },
+  "ISAppStreamMgmtVPCprivateinnovationmgmtSubnet2DefaultRoute040A1498": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "ISAppStreamMgmtVPCprivateinnovationmgmtSubnet2RouteTable925CE157"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "ISAppStreamMgmtVPCpublicinnovationmgmtSubnet2NATGatewayA73C22D8"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/private_innovation_mgmtSubnet2/DefaultRoute"
+   }
+  },
+  "ISAppStreamMgmtVPCIGWD8F23F1A": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/IGW"
+   }
+  },
+  "ISAppStreamMgmtVPCVPCGWDC210076": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "VpcId": {
+     "Ref": "ISAppStreamMgmtVPC7423BC26"
+    },
+    "InternetGatewayId": {
+     "Ref": "ISAppStreamMgmtVPCIGWD8F23F1A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/ISAppStreamMgmtVPC/VPCGW"
+   }
+  },
+  "ISTransitGateway": {
+   "Type": "AWS::EC2::TransitGateway",
+   "Properties": {
+    "AutoAcceptSharedAttachments": "enable",
+    "DefaultRouteTableAssociation": "disable",
+    "DefaultRouteTablePropagation": "disable",
+    "Description": "IS Transit Gateway",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "IS Transit Gateway"
+     }
+    ],
+    "VpnEcmpSupport": "disable"
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/IS_Transit_Gateway"
+   }
+  },
+  "ISTransitGatewayAttachmentEgress": {
+   "Type": "AWS::EC2::TransitGatewayAttachment",
+   "Properties": {
+    "SubnetIds": [
+     {
+      "Ref": "ISAppStreamMgmtVPCprivateinnovationmgmtSubnet1Subnet70686A5C"
+     },
+     {
+      "Ref": "ISAppStreamMgmtVPCprivateinnovationmgmtSubnet2Subnet58B91D59"
+     }
+    ],
+    "TransitGatewayId": {
+     "Ref": "ISTransitGateway"
+    },
+    "VpcId": {
+     "Ref": "ISAppStreamMgmtVPC7423BC26"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "IS-TG-Egress-VPC-Private_SubNet-Attachment"
+     }
+    ]
+   },
+   "DependsOn": [
+    "ISTransitGateway"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/ISTransitGatewayAttachmentEgress"
+   }
+  },
+  "InnovationSandboxManagementAccountISAppStreamMgmtVPCpublicinnovationmgmtSubnet1CA47C7BC": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "ISAppStreamMgmtVPCpublicinnovationmgmtSubnet1RouteTable3532B91B"
+    },
+    "DestinationCidrBlock": "192.168.0.0/16",
+    "TransitGatewayId": {
+     "Ref": "ISTransitGateway"
+    }
+   },
+   "DependsOn": [
+    "ISTransitGatewayAttachmentEgress"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/InnovationSandboxManagementAccountISAppStreamMgmtVPCpublicinnovationmgmtSubnet1CA47C7BC"
+   }
+  },
+  "InnovationSandboxManagementAccountISAppStreamMgmtVPCpublicinnovationmgmtSubnet264F1F096": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "ISAppStreamMgmtVPCpublicinnovationmgmtSubnet2RouteTable76B2FB56"
+    },
+    "DestinationCidrBlock": "192.168.0.0/16",
+    "TransitGatewayId": {
+     "Ref": "ISTransitGateway"
+    }
+   },
+   "DependsOn": [
+    "ISTransitGatewayAttachmentEgress"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/InnovationSandboxManagementAccountISAppStreamMgmtVPCpublicinnovationmgmtSubnet264F1F096"
+   }
+  },
+  "ISTGWShareAppStream": {
+   "Type": "AWS::RAM::ResourceShare",
+   "Properties": {
+    "Name": "ISTGWShareAppStream",
+    "Principals": [
+     {
+      "Ref": "SbxAccountId"
+     }
+    ],
+    "ResourceArns": [
+     {
+      "Fn::Sub": "arn:aws:ec2:${AWS::Region}:${AWS::AccountId}:transit-gateway/${ISTransitGateway}"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/ISTGWShareAppStream"
+   }
+  },
+  "mgmtbucketalA349A638": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "AccessControl": "LogDeliveryWrite",
+    "BucketEncryption": {
+     "ServerSideEncryptionConfiguration": [
+      {
+       "ServerSideEncryptionByDefault": {
+        "SSEAlgorithm": "AES256"
+       }
+      }
+     ]
+    },
+    "BucketName": {
+     "Fn::Join": [
+      "",
+      [
+       "mgmt-ct-",
+       {
+        "Ref": "UUID"
+       },
+       "-al"
+      ]
+     ]
+    },
+    "PublicAccessBlockConfiguration": {
+     "BlockPublicAcls": true,
+     "BlockPublicPolicy": true,
+     "IgnorePublicAcls": true
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/mgmt-bucket-al/Resource"
+   }
+  },
+  "mgmtbucket71519174": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "BucketEncryption": {
+     "ServerSideEncryptionConfiguration": [
+      {
+       "ServerSideEncryptionByDefault": {
+        "SSEAlgorithm": "AES256"
+       }
+      }
+     ]
+    },
+    "BucketName": {
+     "Fn::Join": [
+      "",
+      [
+       "mgmt-ct-",
+       {
+        "Ref": "UUID"
+       }
+      ]
+     ]
+    },
+    "LoggingConfiguration": {
+     "DestinationBucketName": {
+      "Ref": "mgmtbucketalA349A638"
+     }
+    },
+    "PublicAccessBlockConfiguration": {
+     "BlockPublicAcls": true,
+     "BlockPublicPolicy": true,
+     "IgnorePublicAcls": true
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/mgmt-bucket/Resource"
+   }
+  },
+  "mgmtbucketPolicy0C4C568E": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": {
+     "Ref": "mgmtbucket71519174"
+    },
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "s3:*",
+       "Condition": {
+        "Bool": {
+         "aws:SecureTransport": "false"
+        }
+       },
+       "Effect": "Deny",
+       "Principal": {
+        "AWS": "*"
+       },
+       "Resource": [
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:s3:::",
+           {
+            "Ref": "mgmtbucket71519174"
+           }
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:s3:::",
+           {
+            "Ref": "mgmtbucket71519174"
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": "s3:GetBucketAcl",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "cloudtrail.amazonaws.com"
+       },
+       "Resource": {
+        "Fn::GetAtt": [
+         "mgmtbucket71519174",
+         "Arn"
+        ]
+       }
+      },
+      {
+       "Action": "s3:PutObject",
+       "Condition": {
+        "StringEquals": {
+         "s3:x-amz-acl": "bucket-owner-full-control"
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "cloudtrail.amazonaws.com"
+       },
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          {
+           "Fn::GetAtt": [
+            "mgmtbucket71519174",
+            "Arn"
+           ]
+          },
+          "/AWSLogs/",
+          {
+           "Ref": "AWS::AccountId"
+          },
+          "/*"
+         ]
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/mgmt-bucket/Policy/Resource"
+   }
+  },
+  "mgmtflowlogsbucketal21FC00DB": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "AccessControl": "LogDeliveryWrite",
+    "BucketEncryption": {
+     "ServerSideEncryptionConfiguration": [
+      {
+       "ServerSideEncryptionByDefault": {
+        "SSEAlgorithm": "AES256"
+       }
+      }
+     ]
+    },
+    "BucketName": {
+     "Fn::Join": [
+      "",
+      [
+       "mgmt-fl-",
+       {
+        "Ref": "UUID"
+       },
+       "-al"
+      ]
+     ]
+    },
+    "PublicAccessBlockConfiguration": {
+     "BlockPublicAcls": true,
+     "BlockPublicPolicy": true,
+     "IgnorePublicAcls": true
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/mgmt-flowlogs-bucket-al/Resource"
+   }
+  },
+  "mgmtflowlogsbucket5BA94782": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "BucketEncryption": {
+     "ServerSideEncryptionConfiguration": [
+      {
+       "ServerSideEncryptionByDefault": {
+        "SSEAlgorithm": "AES256"
+       }
+      }
+     ]
+    },
+    "BucketName": {
+     "Fn::Join": [
+      "",
+      [
+       "mgmt-fl-",
+       {
+        "Ref": "UUID"
+       }
+      ]
+     ]
+    },
+    "LoggingConfiguration": {
+     "DestinationBucketName": {
+      "Ref": "mgmtflowlogsbucketal21FC00DB"
+     }
+    },
+    "PublicAccessBlockConfiguration": {
+     "BlockPublicAcls": true,
+     "BlockPublicPolicy": true,
+     "IgnorePublicAcls": true
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/mgmt-flowlogs-bucket/Resource"
+   }
+  },
+  "mgmtflowlogsbucketPolicy5B1CD48D": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": {
+     "Ref": "mgmtflowlogsbucket5BA94782"
+    },
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "s3:*",
+       "Condition": {
+        "Bool": {
+         "aws:SecureTransport": "false"
+        }
+       },
+       "Effect": "Deny",
+       "Principal": {
+        "AWS": "*"
+       },
+       "Resource": [
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:s3:::",
+           {
+            "Ref": "mgmtflowlogsbucket5BA94782"
+           }
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:aws:s3:::",
+           {
+            "Ref": "mgmtflowlogsbucket5BA94782"
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/mgmt-flowlogs-bucket/Policy/Resource"
+   }
+  },
+  "CloudTrailA62D711D": {
+   "Type": "AWS::CloudTrail::Trail",
+   "Properties": {
+    "IsLogging": true,
+    "S3BucketName": {
+     "Ref": "mgmtbucket71519174"
+    },
+    "EnableLogFileValidation": true,
+    "EventSelectors": [],
+    "IncludeGlobalServiceEvents": true,
+    "IsMultiRegionTrail": true,
+    "TrailName": "mgmt-cloudtrail"
+   },
+   "DependsOn": [
+    "mgmtbucketPolicy0C4C568E"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/CloudTrail/Resource"
+   }
+  },
+  "FlowLogsFlowLog13041F74": {
+   "Type": "AWS::EC2::FlowLog",
+   "Properties": {
+    "ResourceId": {
+     "Ref": "ISAppStreamMgmtVPC7423BC26"
+    },
+    "ResourceType": "VPC",
+    "LogDestination": {
+     "Fn::GetAtt": [
+      "mgmtflowlogsbucket5BA94782",
+      "Arn"
+     ]
+    },
+    "LogDestinationType": "s3",
+    "TrafficType": "ALL"
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/FlowLogs/FlowLog"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/1VQy27DIBD8ltwJqeNeemsatVWkqkK2lTvGm4YYQ8UjVoT490LsFvc0s7PDaNgCF08lflg909GsWddvPFMasK8tZT3anyShmg5gQaMKjHKaAdoraax2zKZ9Vk8yLjpuuZIBpTgPbIv98Zul3ZHsEXGt4Kx2rYT728wq5Sw0tBWQ9aztjFGM05T8Z07k9UASfFL7Ti2M9IaI5tdIc/BBxuqR/xqmJvO0s/GX5wHk3dpoKg1fOv8rC/ebUOOH+kqemQYUz4QX96jPVAMyJfYvjvVTmZlNQFS8xS3L0xwQE8p1VlMusG8SzE24CCEgqTrAF7O5Fo94W+BydTGcr7WTlg+Aqwl/AF+69RHVAQAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxManagementAccount/CDKMetadata/Default"
+   },
+   "Condition": "CDKMetadataAvailable"
+  }
+ },
+ "Conditions": {
+  "CDKMetadataAvailable": {
+   "Fn::Or": [
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "af-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-northwest-1"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "sa-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-2"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-2"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ }
+}

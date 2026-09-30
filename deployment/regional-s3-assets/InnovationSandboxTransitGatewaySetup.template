@@ -1,0 +1,314 @@
+{
+ "Parameters": {
+  "TGID": {
+   "Type": "String",
+   "Description": "TGID"
+  },
+  "EGREEATTCH": {
+   "Type": "String",
+   "Description": "EGREEATTCH"
+  },
+  "SBXTGATTCH": {
+   "Type": "String",
+   "Description": "SBXTGATTCH"
+  }
+ },
+ "Resources": {
+  "RouteTowardsSBX": {
+   "Type": "AWS::EC2::TransitGatewayRouteTable",
+   "Properties": {
+    "TransitGatewayId": {
+     "Ref": "TGID"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "Route Towards SBX - Innovation Sandbox"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxTransitGatewaySetup/RouteTowardsSBX"
+   }
+  },
+  "RouteFromEgressVPCToSbxForCallBack": {
+   "Type": "AWS::EC2::TransitGatewayRoute",
+   "Properties": {
+    "TransitGatewayRouteTableId": {
+     "Ref": "RouteTowardsSBX"
+    },
+    "DestinationCidrBlock": "192.168.0.0/16",
+    "TransitGatewayAttachmentId": {
+     "Ref": "SBXTGATTCH"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxTransitGatewaySetup/RouteFromEgressVPCToSbxForCallBack"
+   }
+  },
+  "AssocForEgressVPC": {
+   "Type": "AWS::EC2::TransitGatewayRouteTableAssociation",
+   "Properties": {
+    "TransitGatewayAttachmentId": {
+     "Ref": "EGREEATTCH"
+    },
+    "TransitGatewayRouteTableId": {
+     "Ref": "RouteTowardsSBX"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxTransitGatewaySetup/AssocForEgressVPC"
+   }
+  },
+  "RouteTowardsIGW": {
+   "Type": "AWS::EC2::TransitGatewayRouteTable",
+   "Properties": {
+    "TransitGatewayId": {
+     "Ref": "TGID"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "Route Towards IGW - Innovation Sandbox"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxTransitGatewaySetup/RouteTowardsIGW"
+   }
+  },
+  "RouteFromSbxToEgressVPC": {
+   "Type": "AWS::EC2::TransitGatewayRoute",
+   "Properties": {
+    "TransitGatewayRouteTableId": {
+     "Ref": "RouteTowardsIGW"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "TransitGatewayAttachmentId": {
+     "Ref": "EGREEATTCH"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxTransitGatewaySetup/RouteFromSbxToEgressVPC"
+   }
+  },
+  "AssocForSbx": {
+   "Type": "AWS::EC2::TransitGatewayRouteTableAssociation",
+   "Properties": {
+    "TransitGatewayAttachmentId": {
+     "Ref": "SBXTGATTCH"
+    },
+    "TransitGatewayRouteTableId": {
+     "Ref": "RouteTowardsIGW"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxTransitGatewaySetup/AssocForSbx"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/3WNsQ6CQBBEv8X+WDywsdNQ2BrkB9ZjTQ7kLtndkxjCvwvYajWTN5kZC/ZYwn53wlEy1/b55CITTDdF15vqEa7IOJASmyoGUU5OV1yTxMSOVr8ErVcfw2zWFXIFTAtuGIN4vaDSiO86JqUG78+t8iP7g7fKWSQ6j9vHbEJsCTrJX/YAhYVy14n3GaegfiCov/oBmeH179kAAAA="
+   },
+   "Metadata": {
+    "aws:cdk:path": "InnovationSandboxTransitGatewaySetup/CDKMetadata/Default"
+   },
+   "Condition": "CDKMetadataAvailable"
+  }
+ },
+ "Conditions": {
+  "CDKMetadataAvailable": {
+   "Fn::Or": [
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "af-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-northwest-1"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "sa-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-2"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-2"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ }
+}

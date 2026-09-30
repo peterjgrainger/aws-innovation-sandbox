@@ -1,0 +1,1335 @@
+{
+  "Parameters": {
+    "TgwID": {
+      "Type": "String",
+      "Description": "TgwID"
+    },
+    "MgmtID": {
+      "Type": "String",
+      "Description": "MgmtID"
+    },
+    "UUID": {
+      "Type": "String",
+      "Description": "UUID"
+    },
+    "EIP": {
+      "Type": "String",
+      "Description": "EIP"
+    },
+    "EIP2": {
+      "Type": "String",
+      "Description": "EIP"
+    }
+  },
+  "Resources": {
+    "ISSBXVPCA7ADE657": {
+      "Type": "AWS::EC2::VPC",
+      "Properties": {
+        "CidrBlock": "192.168.0.0/16",
+        "EnableDnsHostnames": true,
+        "EnableDnsSupport": true,
+        "InstanceTenancy": "default",
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "InnovationSandboxSbxAccount/ISSBXVPC"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/ISSBXVPC/Resource"
+      }
+    },
+    "ISSBXVPCprivateinnovationsandbox1Subnet1Subnet28A493C3": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "ISSBXVPCA7ADE657"
+        },
+        "AvailabilityZone": {
+          "Fn::Select": [
+            0,
+            {
+              "Fn::GetAZs": ""
+            }
+          ]
+        },
+        "CidrBlock": "192.168.0.0/24",
+        "MapPublicIpOnLaunch": false,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "private_innovation_sandbox_1"
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Isolated"
+          },
+          {
+            "Key": "Name",
+            "Value": "InnovationSandboxSbxAccount/ISSBXVPC/private_innovation_sandbox_1Subnet1"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/ISSBXVPC/private_innovation_sandbox_1Subnet1/Subnet"
+      }
+    },
+    "ISSBXVPCprivateinnovationsandbox1Subnet1RouteTable73CE5343": {
+      "Type": "AWS::EC2::RouteTable",
+      "Properties": {
+        "VpcId": {
+          "Ref": "ISSBXVPCA7ADE657"
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "InnovationSandboxSbxAccount/ISSBXVPC/private_innovation_sandbox_1Subnet1"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/ISSBXVPC/private_innovation_sandbox_1Subnet1/RouteTable"
+      }
+    },
+    "ISSBXVPCprivateinnovationsandbox1Subnet1RouteTableAssociationC373FC4A": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "ISSBXVPCprivateinnovationsandbox1Subnet1RouteTable73CE5343"
+        },
+        "SubnetId": {
+          "Ref": "ISSBXVPCprivateinnovationsandbox1Subnet1Subnet28A493C3"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/ISSBXVPC/private_innovation_sandbox_1Subnet1/RouteTableAssociation"
+      }
+    },
+    "ISSBXVPCprivateinnovationsandbox1Subnet2Subnet1CEF098E": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "ISSBXVPCA7ADE657"
+        },
+        "AvailabilityZone": {
+          "Fn::Select": [
+            1,
+            {
+              "Fn::GetAZs": ""
+            }
+          ]
+        },
+        "CidrBlock": "192.168.1.0/24",
+        "MapPublicIpOnLaunch": false,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "private_innovation_sandbox_1"
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Isolated"
+          },
+          {
+            "Key": "Name",
+            "Value": "InnovationSandboxSbxAccount/ISSBXVPC/private_innovation_sandbox_1Subnet2"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/ISSBXVPC/private_innovation_sandbox_1Subnet2/Subnet"
+      }
+    },
+    "ISSBXVPCprivateinnovationsandbox1Subnet2RouteTable6433129B": {
+      "Type": "AWS::EC2::RouteTable",
+      "Properties": {
+        "VpcId": {
+          "Ref": "ISSBXVPCA7ADE657"
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "InnovationSandboxSbxAccount/ISSBXVPC/private_innovation_sandbox_1Subnet2"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/ISSBXVPC/private_innovation_sandbox_1Subnet2/RouteTable"
+      }
+    },
+    "ISSBXVPCprivateinnovationsandbox1Subnet2RouteTableAssociation52E25FB4": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "ISSBXVPCprivateinnovationsandbox1Subnet2RouteTable6433129B"
+        },
+        "SubnetId": {
+          "Ref": "ISSBXVPCprivateinnovationsandbox1Subnet2Subnet1CEF098E"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/ISSBXVPC/private_innovation_sandbox_1Subnet2/RouteTableAssociation"
+      }
+    },
+    "ISSBXVPCprivateinnovationsandbox2Subnet1Subnet0011FAE5": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "ISSBXVPCA7ADE657"
+        },
+        "AvailabilityZone": {
+          "Fn::Select": [
+            0,
+            {
+              "Fn::GetAZs": ""
+            }
+          ]
+        },
+        "CidrBlock": "192.168.2.0/24",
+        "MapPublicIpOnLaunch": false,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "private_innovation_sandbox_2"
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Isolated"
+          },
+          {
+            "Key": "Name",
+            "Value": "InnovationSandboxSbxAccount/ISSBXVPC/private_innovation_sandbox_2Subnet1"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/ISSBXVPC/private_innovation_sandbox_2Subnet1/Subnet"
+      }
+    },
+    "ISSBXVPCprivateinnovationsandbox2Subnet1RouteTableD429FD4A": {
+      "Type": "AWS::EC2::RouteTable",
+      "Properties": {
+        "VpcId": {
+          "Ref": "ISSBXVPCA7ADE657"
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "InnovationSandboxSbxAccount/ISSBXVPC/private_innovation_sandbox_2Subnet1"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/ISSBXVPC/private_innovation_sandbox_2Subnet1/RouteTable"
+      }
+    },
+    "ISSBXVPCprivateinnovationsandbox2Subnet1RouteTableAssociationCB576240": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "ISSBXVPCprivateinnovationsandbox2Subnet1RouteTableD429FD4A"
+        },
+        "SubnetId": {
+          "Ref": "ISSBXVPCprivateinnovationsandbox2Subnet1Subnet0011FAE5"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/ISSBXVPC/private_innovation_sandbox_2Subnet1/RouteTableAssociation"
+      }
+    },
+    "ISSBXVPCprivateinnovationsandbox2Subnet2SubnetC1884F65": {
+      "Type": "AWS::EC2::Subnet",
+      "Properties": {
+        "VpcId": {
+          "Ref": "ISSBXVPCA7ADE657"
+        },
+        "AvailabilityZone": {
+          "Fn::Select": [
+            1,
+            {
+              "Fn::GetAZs": ""
+            }
+          ]
+        },
+        "CidrBlock": "192.168.3.0/24",
+        "MapPublicIpOnLaunch": false,
+        "Tags": [
+          {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "private_innovation_sandbox_2"
+          },
+          {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Isolated"
+          },
+          {
+            "Key": "Name",
+            "Value": "InnovationSandboxSbxAccount/ISSBXVPC/private_innovation_sandbox_2Subnet2"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/ISSBXVPC/private_innovation_sandbox_2Subnet2/Subnet"
+      }
+    },
+    "ISSBXVPCprivateinnovationsandbox2Subnet2RouteTable03944F8C": {
+      "Type": "AWS::EC2::RouteTable",
+      "Properties": {
+        "VpcId": {
+          "Ref": "ISSBXVPCA7ADE657"
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "InnovationSandboxSbxAccount/ISSBXVPC/private_innovation_sandbox_2Subnet2"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/ISSBXVPC/private_innovation_sandbox_2Subnet2/RouteTable"
+      }
+    },
+    "ISSBXVPCprivateinnovationsandbox2Subnet2RouteTableAssociation99100213": {
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "ISSBXVPCprivateinnovationsandbox2Subnet2RouteTable03944F8C"
+        },
+        "SubnetId": {
+          "Ref": "ISSBXVPCprivateinnovationsandbox2Subnet2SubnetC1884F65"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/ISSBXVPC/private_innovation_sandbox_2Subnet2/RouteTableAssociation"
+      }
+    },
+    "ISTransitGatewayAttachmentSbx": {
+      "Type": "AWS::EC2::TransitGatewayAttachment",
+      "Properties": {
+        "SubnetIds": [
+          {
+            "Ref": "ISSBXVPCprivateinnovationsandbox1Subnet1Subnet28A493C3"
+          }
+        ],
+        "TransitGatewayId": {
+          "Ref": "TgwID"
+        },
+        "VpcId": {
+          "Ref": "ISSBXVPCA7ADE657"
+        },
+        "Tags": [
+          {
+            "Key": "Name",
+            "Value": "IS-TG-Sbx-VPC-Private_SubNet-Attachment"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/ISTransitGatewayAttachmentSbx"
+      }
+    },
+    "InnovationSandboxSbxAccountISSBXVPCprivateinnovationsandbox1Subnet110BAAA57": {
+      "Type": "AWS::EC2::Route",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "ISSBXVPCprivateinnovationsandbox1Subnet1RouteTable73CE5343"
+        },
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "TransitGatewayId": {
+          "Ref": "TgwID"
+        }
+      },
+      "DependsOn": [
+        "ISTransitGatewayAttachmentSbx"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/InnovationSandboxSbxAccountISSBXVPCprivateinnovationsandbox1Subnet110BAAA57"
+      }
+    },
+    "InnovationSandboxSbxAccountISSBXVPCprivateinnovationsandbox1Subnet2AFE85D9F": {
+      "Type": "AWS::EC2::Route",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "ISSBXVPCprivateinnovationsandbox1Subnet2RouteTable6433129B"
+        },
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "TransitGatewayId": {
+          "Ref": "TgwID"
+        }
+      },
+      "DependsOn": [
+        "ISTransitGatewayAttachmentSbx"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/InnovationSandboxSbxAccountISSBXVPCprivateinnovationsandbox1Subnet2AFE85D9F"
+      }
+    },
+    "InnovationSandboxSbxAccountISSBXVPCprivateinnovationsandbox2Subnet19F6D2093": {
+      "Type": "AWS::EC2::Route",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "ISSBXVPCprivateinnovationsandbox2Subnet1RouteTableD429FD4A"
+        },
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "TransitGatewayId": {
+          "Ref": "TgwID"
+        }
+      },
+      "DependsOn": [
+        "ISTransitGatewayAttachmentSbx"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/InnovationSandboxSbxAccountISSBXVPCprivateinnovationsandbox2Subnet19F6D2093"
+      }
+    },
+    "InnovationSandboxSbxAccountISSBXVPCprivateinnovationsandbox2Subnet2F20FCEBE": {
+      "Type": "AWS::EC2::Route",
+      "Properties": {
+        "RouteTableId": {
+          "Ref": "ISSBXVPCprivateinnovationsandbox2Subnet2RouteTable03944F8C"
+        },
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "TransitGatewayId": {
+          "Ref": "TgwID"
+        }
+      },
+      "DependsOn": [
+        "ISTransitGatewayAttachmentSbx"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/InnovationSandboxSbxAccountISSBXVPCprivateinnovationsandbox2Subnet2F20FCEBE"
+      }
+    },
+    "SandboxLoginRole3E38BC4D": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":iam::",
+                      {
+                        "Ref": "MgmtID"
+                      },
+                      ":root"
+                    ]
+                  ]
+                }
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "ManagedPolicyArns": [
+          {
+            "Ref": "ManagedPolicy7BAB786E"
+          }
+        ],
+        "RoleName": "SandboxLoginRole"
+      },
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/SandboxLoginRole/Resource"
+      }
+    },
+    "ManagedPolicy7BAB786E": {
+      "Type": "AWS::IAM::ManagedPolicy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "*",
+              "Condition": {
+                "IpAddress": {
+                  "aws:SourceIp": [
+                    {
+                      "Ref": "EIP"
+                    },
+                    {
+                      "Ref": "EIP2"
+                    },
+                    "10.0.0.0/16",
+                    "172.16.0.0/12",
+                    "192.168.0.0/16"
+                  ]
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*",
+              "Sid": "AllowAppStreamIPs"
+            },
+            {
+              "Action": "*",
+              "Condition": {
+                "Bool": {
+                  "aws:ViaAWSService": "true"
+                }
+              },
+              "Effect": "Allow",
+              "Resource": "*",
+              "Sid": "AllowAWSServiceCalls"
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "Description": "",
+        "Path": "/"
+      },
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/ManagedPolicy/Resource"
+      }
+    },
+    "SandboxServiceRoleDAAF0320": {
+      "Type": "AWS::IAM::Role",
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": [
+                "apigateway.amazonaws.com",
+                "athena.amazonaws.com",
+                "autoscaling.amazonaws.com",
+                "cloudtrail.amazonaws.com",
+                "config-multiaccountsetup.amazonaws.com",
+                "config.amazonaws.com",
+                "dynamodb.amazonaws.com",
+                "dynamodb.application-autoscaling.amazonaws.com",
+                "ec2.application-autoscaling.amazonaws.com",
+                "ec2fleet.amazonaws.com",
+                "ec2scheduled.amazonaws.com",
+                "ecs-tasks.amazonaws.com",
+                "ecs.application-autoscaling.amazonaws.com",
+                "edgelambda.amazonaws.com",
+                "ecs.amazonaws.com",
+                "firehose.amazonaws.com",
+                "eks.amazonaws.com",
+                "glue.amazonaws.com",
+                "greengrass.amazonaws.com",
+                "guardduty.amazonaws.com",
+                "health.amazonaws.com",
+                "iam.amazonaws.com",
+                "kinesis.amazonaws.com",
+                "kinesisanalytics.amazonaws.com",
+                "kms.amazonaws.com",
+                "lakeformation.amazonaws.com",
+                "lambda.amazonaws.com",
+                "macie.amazonaws.com",
+                "opsworks-cm.amazonaws.com",
+                "opsworks.amazonaws.com",
+                "organizations.amazonaws.com",
+                "quicksight.amazonaws.com",
+                "rds.amazonaws.com",
+                "redshift.amazonaws.com",
+                "rekognition.amazonaws.com",
+                "s3.amazonaws.com",
+                "sagemaker.amazonaws.com",
+                "secretsmanager.amazonaws.com",
+                "servicecatalog.amazonaws.com",
+                "spotfleet.amazonaws.com",
+                "sns.amazonaws.com",
+                "sqs.amazonaws.com",
+                "sso.amazonaws.com",
+                "storagegateway.amazonaws.com"
+              ]
+              }
+            },
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "ec2.",
+                      {
+                        "Ref": "AWS::URLSuffix"
+                      }
+                    ]
+                  ]
+                }
+              }
+            },
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": {
+                  "Fn::FindInMap": [
+                    "ServiceprincipalMap",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    "ssm"
+                  ]
+                }
+              }
+            },
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": {
+                  "Fn::FindInMap": [
+                    "ServiceprincipalMap",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    "states"
+                  ]
+                }
+              }
+            },
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "sts.amazonaws.com"
+              }
+            },
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "support.amazonaws.com"
+              }
+            },
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "swf.amazonaws.com"
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "RoleName": "SandboxServiceRole"
+      },
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/SandboxServiceRole/Resource"
+      }
+    },
+    "SandboxServiceRoleDefaultPolicyBD0FD366": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "*",
+              "Effect": "Allow",
+              "Resource": "*"
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "SandboxServiceRoleDefaultPolicyBD0FD366",
+        "Roles": [
+          {
+            "Ref": "SandboxServiceRoleDAAF0320"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/SandboxServiceRole/DefaultPolicy/Resource"
+      }
+    },
+    "SandboxEC2InstanceProfile": {
+      "Type": "AWS::IAM::InstanceProfile",
+      "Properties": {
+        "Roles": [
+          {
+            "Ref": "SandboxServiceRoleDAAF0320"
+          }
+        ]
+      },
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/Sandbox-EC2-Instance-Profile"
+      }
+    },
+    "sandboxbucketal634316B9": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "AccessControl": "LogDeliveryWrite",
+        "BucketEncryption": {
+          "ServerSideEncryptionConfiguration": [
+            {
+              "ServerSideEncryptionByDefault": {
+                "SSEAlgorithm": "AES256"
+              }
+            }
+          ]
+        },
+        "BucketName": {
+          "Fn::Join": [
+            "",
+            [
+              "sandbox-ct-",
+              {
+                "Ref": "UUID"
+              },
+              "-al"
+            ]
+          ]
+        },
+        "PublicAccessBlockConfiguration": {
+          "BlockPublicAcls": true,
+          "BlockPublicPolicy": true,
+          "IgnorePublicAcls": true
+        }
+      },
+      "UpdateReplacePolicy": "Retain",
+      "DeletionPolicy": "Retain",
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/sandbox-bucket-al/Resource"
+      }
+    },
+    "sandboxbucket88D01CB1": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketEncryption": {
+          "ServerSideEncryptionConfiguration": [
+            {
+              "ServerSideEncryptionByDefault": {
+                "SSEAlgorithm": "AES256"
+              }
+            }
+          ]
+        },
+        "BucketName": {
+          "Fn::Join": [
+            "",
+            [
+              "sandbox-ct-",
+              {
+                "Ref": "UUID"
+              }
+            ]
+          ]
+        },
+        "LoggingConfiguration": {
+          "DestinationBucketName": {
+            "Ref": "sandboxbucketal634316B9"
+          }
+        },
+        "PublicAccessBlockConfiguration": {
+          "BlockPublicAcls": true,
+          "BlockPublicPolicy": true,
+          "IgnorePublicAcls": true
+        }
+      },
+      "UpdateReplacePolicy": "Retain",
+      "DeletionPolicy": "Retain",
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/sandbox-bucket/Resource"
+      }
+    },
+    "sandboxbucketPolicy3505C1DD": {
+      "Type": "AWS::S3::BucketPolicy",
+      "Properties": {
+        "Bucket": {
+          "Ref": "sandboxbucket88D01CB1"
+        },
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:*",
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": "false"
+                }
+              },
+              "Effect": "Deny",
+              "Principal": {
+                "AWS": "*"
+              },
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:s3:::",
+                      {
+                        "Ref": "sandboxbucket88D01CB1"
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:s3:::",
+                      {
+                        "Ref": "sandboxbucket88D01CB1"
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "Action": "s3:GetBucketAcl",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "cloudtrail.amazonaws.com"
+              },
+              "Resource": {
+                "Fn::GetAtt": [
+                  "sandboxbucket88D01CB1",
+                  "Arn"
+                ]
+              }
+            },
+            {
+              "Action": "s3:PutObject",
+              "Condition": {
+                "StringEquals": {
+                  "s3:x-amz-acl": "bucket-owner-full-control"
+                }
+              },
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "cloudtrail.amazonaws.com"
+              },
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    {
+                      "Fn::GetAtt": [
+                        "sandboxbucket88D01CB1",
+                        "Arn"
+                      ]
+                    },
+                    "/AWSLogs/",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          ],
+          "Version": "2012-10-17"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/sandbox-bucket/Policy/Resource"
+      }
+    },
+    "sandboxflowlogsbucketalC42A8436": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "AccessControl": "LogDeliveryWrite",
+        "BucketEncryption": {
+          "ServerSideEncryptionConfiguration": [
+            {
+              "ServerSideEncryptionByDefault": {
+                "SSEAlgorithm": "AES256"
+              }
+            }
+          ]
+        },
+        "BucketName": {
+          "Fn::Join": [
+            "",
+            [
+              "sandbox-fl-",
+              {
+                "Ref": "UUID"
+              },
+              "-al"
+            ]
+          ]
+        },
+        "PublicAccessBlockConfiguration": {
+          "BlockPublicAcls": true,
+          "BlockPublicPolicy": true,
+          "IgnorePublicAcls": true
+        }
+      },
+      "UpdateReplacePolicy": "Retain",
+      "DeletionPolicy": "Retain",
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/sandbox-flowlogs-bucket-al/Resource"
+      }
+    },
+    "sandboxflowlogsbucket1E067CBE": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "BucketEncryption": {
+          "ServerSideEncryptionConfiguration": [
+            {
+              "ServerSideEncryptionByDefault": {
+                "SSEAlgorithm": "AES256"
+              }
+            }
+          ]
+        },
+        "BucketName": {
+          "Fn::Join": [
+            "",
+            [
+              "sandbox-fl-",
+              {
+                "Ref": "UUID"
+              }
+            ]
+          ]
+        },
+        "LoggingConfiguration": {
+          "DestinationBucketName": {
+            "Ref": "sandboxflowlogsbucketalC42A8436"
+          }
+        },
+        "PublicAccessBlockConfiguration": {
+          "BlockPublicAcls": true,
+          "BlockPublicPolicy": true,
+          "IgnorePublicAcls": true
+        }
+      },
+      "UpdateReplacePolicy": "Retain",
+      "DeletionPolicy": "Retain",
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/sandbox-flowlogs-bucket/Resource"
+      }
+    },
+    "sandboxflowlogsbucketPolicy6EE9EF59": {
+      "Type": "AWS::S3::BucketPolicy",
+      "Properties": {
+        "Bucket": {
+          "Ref": "sandboxflowlogsbucket1E067CBE"
+        },
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:*",
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": "false"
+                }
+              },
+              "Effect": "Deny",
+              "Principal": {
+                "AWS": "*"
+              },
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:s3:::",
+                      {
+                        "Ref": "sandboxflowlogsbucket1E067CBE"
+                      }
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:s3:::",
+                      {
+                        "Ref": "sandboxflowlogsbucket1E067CBE"
+                      },
+                      "/*"
+                    ]
+                  ]
+                }
+              ]
+            }
+          ],
+          "Version": "2012-10-17"
+        }
+      },
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/sandbox-flowlogs-bucket/Policy/Resource"
+      }
+    },
+    "CloudTrailA62D711D": {
+      "Type": "AWS::CloudTrail::Trail",
+      "Properties": {
+        "IsLogging": true,
+        "S3BucketName": {
+          "Ref": "sandboxbucket88D01CB1"
+        },
+        "EnableLogFileValidation": true,
+        "EventSelectors": [],
+        "IncludeGlobalServiceEvents": true,
+        "IsMultiRegionTrail": true,
+        "TrailName": "sandbox-cloudtrail"
+      },
+      "DependsOn": [
+        "sandboxbucketPolicy3505C1DD"
+      ],
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/CloudTrail/Resource"
+      }
+    },
+    "FlowLogsFlowLog13041F74": {
+      "Type": "AWS::EC2::FlowLog",
+      "Properties": {
+        "ResourceId": {
+          "Ref": "ISSBXVPCA7ADE657"
+        },
+        "ResourceType": "VPC",
+        "LogDestination": {
+          "Fn::GetAtt": [
+            "sandboxflowlogsbucket1E067CBE",
+            "Arn"
+          ]
+        },
+        "LogDestinationType": "s3",
+        "TrafficType": "ALL"
+      },
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/FlowLogs/FlowLog"
+      }
+    },
+    "CDKMetadata": {
+      "Type": "AWS::CDK::Metadata",
+      "Properties": {
+        "Analytics": "v2:deflate64:H4sIAAAAAAAA/02QT2/CMAzFPwv3EFbYZbcxpE2ThlQVxN2kpjOkcZU/VCjKd19LmcLpPf+sPNspZPG2ki+zd+jdXNWXRVRsUcadB3URm5MpwUKLHq2o0HGwCsWGjfM2KD/2Mz2ZoVGTJzZjsYWuI9MkMSZHVEsZD50aO4dyI0pLV/C4C0eD95zsKg4e93DUmHlma+dYEfxP2VswjvzXkNXDbe2HtX9bNDlIfGruf7gZwcMmQdDKWPE04a5bMNBgXbImdZvWfwaZZ/c9/AIYhaXlE2lMwq1k/AjqMp3xcJPkV891EkpzqL0F0jLuR3ncRDqlJAzXKM9ucS1e5bKQq9nZEc1tMJ5alNWkf8tDq6jCAQAA"
+      },
+      "Metadata": {
+        "aws:cdk:path": "InnovationSandboxSbxAccount/CDKMetadata/Default"
+      },
+      "Condition": "CDKMetadataAvailable"
+    }
+  },
+  "Conditions": {
+    "CDKMetadataAvailable": {
+      "Fn::Or": [
+        {
+          "Fn::Or": [
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "af-south-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-east-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-northeast-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-northeast-2"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-south-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-southeast-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ap-southeast-2"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "ca-central-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "cn-north-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "cn-northwest-1"
+              ]
+            }
+          ]
+        },
+        {
+          "Fn::Or": [
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-central-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-north-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-south-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-west-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-west-2"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "eu-west-3"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "me-south-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "sa-east-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "us-east-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "us-east-2"
+              ]
+            }
+          ]
+        },
+        {
+          "Fn::Or": [
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "us-west-1"
+              ]
+            },
+            {
+              "Fn::Equals": [
+                {
+                  "Ref": "AWS::Region"
+                },
+                "us-west-2"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "Mappings": {
+    "ServiceprincipalMap": {
+      "af-south-1": {
+        "ssm": "ssm.af-south-1.amazonaws.com",
+        "states": "states.af-south-1.amazonaws.com"
+      },
+      "ap-east-1": {
+        "ssm": "ssm.ap-east-1.amazonaws.com",
+        "states": "states.ap-east-1.amazonaws.com"
+      },
+      "ap-northeast-1": {
+        "ssm": "ssm.amazonaws.com",
+        "states": "states.ap-northeast-1.amazonaws.com"
+      },
+      "ap-northeast-2": {
+        "ssm": "ssm.amazonaws.com",
+        "states": "states.ap-northeast-2.amazonaws.com"
+      },
+      "ap-northeast-3": {
+        "ssm": "ssm.amazonaws.com",
+        "states": "states.ap-northeast-3.amazonaws.com"
+      },
+      "ap-south-1": {
+        "ssm": "ssm.amazonaws.com",
+        "states": "states.ap-south-1.amazonaws.com"
+      },
+      "ap-southeast-1": {
+        "ssm": "ssm.amazonaws.com",
+        "states": "states.ap-southeast-1.amazonaws.com"
+      },
+      "ap-southeast-2": {
+        "ssm": "ssm.amazonaws.com",
+        "states": "states.ap-southeast-2.amazonaws.com"
+      },
+      "ap-southeast-3": {
+        "ssm": "ssm.ap-southeast-3.amazonaws.com",
+        "states": "states.ap-southeast-3.amazonaws.com"
+      },
+      "ca-central-1": {
+        "ssm": "ssm.amazonaws.com",
+        "states": "states.ca-central-1.amazonaws.com"
+      },
+      "cn-north-1": {
+        "ssm": "ssm.amazonaws.com",
+        "states": "states.cn-north-1.amazonaws.com"
+      },
+      "cn-northwest-1": {
+        "ssm": "ssm.amazonaws.com",
+        "states": "states.cn-northwest-1.amazonaws.com"
+      },
+      "eu-central-1": {
+        "ssm": "ssm.amazonaws.com",
+        "states": "states.eu-central-1.amazonaws.com"
+      },
+      "eu-north-1": {
+        "ssm": "ssm.amazonaws.com",
+        "states": "states.eu-north-1.amazonaws.com"
+      },
+      "eu-south-1": {
+        "ssm": "ssm.eu-south-1.amazonaws.com",
+        "states": "states.eu-south-1.amazonaws.com"
+      },
+      "eu-south-2": {
+        "ssm": "ssm.eu-south-2.amazonaws.com",
+        "states": "states.eu-south-2.amazonaws.com"
+      },
+      "eu-west-1": {
+        "ssm": "ssm.amazonaws.com",
+        "states": "states.eu-west-1.amazonaws.com"
+      },
+      "eu-west-2": {
+        "ssm": "ssm.amazonaws.com",
+        "states": "states.eu-west-2.amazonaws.com"
+      },
+      "eu-west-3": {
+        "ssm": "ssm.amazonaws.com",
+        "states": "states.eu-west-3.amazonaws.com"
+      },
+      "me-south-1": {
+        "ssm": "ssm.me-south-1.amazonaws.com",
+        "states": "states.me-south-1.amazonaws.com"
+      },
+      "sa-east-1": {
+        "ssm": "ssm.amazonaws.com",
+        "states": "states.sa-east-1.amazonaws.com"
+      },
+      "us-east-1": {
+        "ssm": "ssm.amazonaws.com",
+        "states": "states.us-east-1.amazonaws.com"
+      },
+      "us-east-2": {
+        "ssm": "ssm.amazonaws.com",
+        "states": "states.us-east-2.amazonaws.com"
+      },
+      "us-gov-east-1": {
+        "ssm": "ssm.amazonaws.com",
+        "states": "states.us-gov-east-1.amazonaws.com"
+      },
+      "us-gov-west-1": {
+        "ssm": "ssm.amazonaws.com",
+        "states": "states.us-gov-west-1.amazonaws.com"
+      },
+      "us-iso-east-1": {
+        "ssm": "ssm.amazonaws.com",
+        "states": "states.amazonaws.com"
+      },
+      "us-iso-west-1": {
+        "ssm": "ssm.us-iso-west-1.amazonaws.com",
+        "states": "states.amazonaws.com"
+      },
+      "us-isob-east-1": {
+        "ssm": "ssm.amazonaws.com",
+        "states": "states.amazonaws.com"
+      },
+      "us-west-1": {
+        "ssm": "ssm.amazonaws.com",
+        "states": "states.us-west-1.amazonaws.com"
+      },
+      "us-west-2": {
+        "ssm": "ssm.amazonaws.com",
+        "states": "states.us-west-2.amazonaws.com"
+      }
+    }
+  }
+}
